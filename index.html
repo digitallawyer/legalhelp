@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="internal" id="document">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Find Legal Help</title>
+    <meta content="Legal.io is used by organizations and professionals to deliver legal services seamlessly, from Intake to Outcome." name="description" />
+    <meta content="attorney, lawyer, legal services, legal aid, lawyer referral service" name="keywords" />
+    <link rel="stylesheet" type="text/css" href="https://www.legal.io/assets/master-legalio-6990a18567.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.4.1/dist/instantsearch.min.css">
+    <link rel="stylesheet" type="text/css" href="./fonts/ss-gizmo.css">
+    <link rel="stylesheet" type="text/css" href="./overrides.css">
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.4.1/dist/instantsearch.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.4.18/dist/cdn/placesInstantsearchWidget.min.js"></script>
+    <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5a639ec39e4d9e001224c0f7&product=inline-share-buttons"></script>
+
+
+    <title>Find Legal Help</title>
+</head>
+
+<body class=" no-fouc" id="Body">
+
+    <header class=" " id="Header" role="banner">
+        <div id="HeaderPrimary">
+            <div class="wrapper-large flex items-center justify-between py0">
+                <a href="https://www.legalhelp.io" id="Logo" title="Legal.io">
+                  <span>Legal Help</span>
+                </a>
+                <div id="Navigation">
+                    <section class="nav-static" id="UserLogin">
+                        <nav class="nav-menu text-small caps letter-spacing-1" role="navigation">
+                            <ul class="nav-menu-items">
+                                <li>
+                                    <div class="sharethis-inline-share-buttons"></div>
+                                </li>
+                            </ul>
+                        </nav>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="no-search" id="Main" role="main">
+        <div class="js-flash">
+        </div>
+        <div class="wrapper-large split-layout">
+            <aside class="split-sidebar">
+                <section class="section">
+                    <h4 class="section-title is-white">
+                      Search
+                    </h4>
+                    <div class="filters-item form-field reset-width mb0 mr1">
+                        <input class="text-medium js-disable-key13" id="SearchString" />
+                    </div>
+                    <p class="text-medium px2 pb0 bold mb1">Organization Type</p>
+                    <div class="js-filters-type text-medium px2"></div>
+                    <p class="text-medium px2 pb0 bold mt2 mb1">State</p>
+                    <div id="state" class="text-medium px2"></></div>
+
+                    
+
+                    <div class="">
+                        <div class="filters-item text-medium">
+                            
+                            <div id="county"></div>
+                            <div class="js-filters-clear"></div>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+            <div class="split-content">
+                <div class="add-shadows">
+                    <div id="SearchTags" class="mb2" style="max-height: 46px;">
+                        <div class="text-muted text-medium" id="SearchStats"></div>
+                        <div class="tags tags-small filters-js-current-refined-values"></div>
+                    </div>
+                </div>
+                <div id="SearchResults"></div>
+                <div id="SearchPagination"></div>
+            </div>
+             <aside class="split-sidebar is-flipped">
+                <section class="section">
+                    <h4 class="section-title is-white">
+                      Contributors
+                    </h4>
+                    <div class="section-content">test</div>
+                   
+                </section>
+                <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.legal.io&width=450&layout=standard&action=like&size=small&show_faces=true&share=true&height=80&appId=420912137949344" width="100%" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+            </aside>
+        </div>
+    </main>
+    <script>
+    var search = instantsearch({
+        appId: "J68ON5MQ9M",
+        apiKey: "f9217ccdd8e1925a1823e00377e86235",
+        indexName: 'legal_organizations',
+        searchParameters: {
+            aroundLatLngViaIP: true
+        },
+        urlSync: true
+    });
+
+    // Widgets
+
+    search.addWidget(
+        instantsearch.widgets.searchBox({
+            container: '#SearchString',
+            placeholder: 'Search By Keyword'
+        })
+    );
+
+    search.addWidget(
+        instantsearch.widgets.stats({
+            container: '#SearchStats'
+        })
+    );
+
+    search.on('render', function() {
+        jQuery('#SearchPagination > ul').addClass('pagination');
+        jQuery('#SearchPagination > ul > li > span, #SearchPagination > ul > li > a').addClass('pagination-step');
+        jQuery('.ais-pagination--link').removeClass('is-active');
+        jQuery('.ais-pagination--item__active .ais-pagination--link').addClass('is-active');
+        jQuery('.ais-pagination--item__disabled .ais-pagination--link').addClass('is-disabled');
+
+    });
+
+
+    var hitTemplate =
+        '<article class="card is-horizontal no-shadows">' +
+        '{{#logo_url}}<div class="card-avatar"><div class="avatar-medium no-border"><img src="{{{logo_url}}}" /></div></div>{{/logo_url}}' +
+        '<div class="card-inner">' +
+        '<header class="card-header">' +
+        '<h2 class="card-header-title"><a href="{{{url}}}" target="blank">{{{name}}}</a></h2>' +
+
+        '</header>' +
+        '<p class="card-content-subtitle text-muted"><i class="ss-gizmo ss-location"></i>&nbsp;{{{street_address}}}</p>' +
+        '{{#description}}<p class="card-content">{{{description}}}</p>{{/description}}' +
+        '<footer class="card-footer">' +
+        '<a class="button button-small button-outlined mr2" href="tel:{{{phone}}}"><i class="ss-gizmo ss-phone"></i>Call</a>' +
+        '{{#url}}<a class="button button-small button-outlined mr2" href="{{{url}}}" target="blank"><i class="ss-gizmo ss-globe"></i>Website</a>{{/url}}' +
+        '</footer>' +
+        '</div>' +
+        '</article>';
+
+    var noResultsTemplate =
+        '<div class="text-center">No results found matching <strong>{{query}}</strong>.</div>';
+
+    var menuTemplate =
+        '<a href="javascript:void(0);" class="facet-item {{#isRefined}}active{{/isRefined}}"><span class="facet-name"><i class="fa fa-angle-right"></i>&nbsp;{{name}}</span class="facet-name"></a>';
+
+    var facetTemplateCheckbox =
+        '<a href="javascript:void(0);" class="facet-item">' +
+        '<input type="checkbox" class="{{cssClasses.checkbox}}" value="{{name}}" {{#isRefined}}checked{{/isRefined}} />{{name}}' +
+        '<span class="facet-count">({{count}})</span>' +
+        '</a>';
+
+    var facetTemplateColors =
+        '<a href="javascript:void(0);" data-facet-value="{{name}}" class="facet-color {{#isRefined}}checked{{/isRefined}}"></a>';
+
+    search.addWidget(
+        instantsearch.widgets.hits({
+            container: '#SearchResults',
+            hitsPerPage: 3,
+            templates: {
+                empty: noResultsTemplate,
+                item: hitTemplate
+            }
+        })
+    );
+
+    search.addWidget(
+        instantsearch.widgets.refinementList({
+            container: '.js-filters-type',
+            attributeName: 'type',
+            sortBy: ['isRefined', 'count:desc', 'name:asc'],
+            limit: 100,
+            operator: 'or',
+            cssClasses: {
+                count: 'tag text-small bold ml1'
+            }
+        })
+    );
+
+    search.addWidget(
+        instantsearch.widgets.refinementList({
+            container: '#state',
+            attributeName: 'state',
+            sortBy: ['isRefined', 'count:desc', 'name:asc'],
+            limit: 10,
+            searchForFacetValues: [{placeholder: 'Search By Keyword'}, true], 
+            operator: 'or',
+            cssClasses: {
+                count: 'tag text-small bold ml1',
+                list: 'mt1'
+            }
+        })
+    );
+
+    search.addWidget(
+        instantsearch.widgets.currentRefinedValues({
+            container: '.filters-js-current-refined-values',
+            attributes: [{ name: 'type' }, { name: 'state' }],
+            onlyListedAttributes: true,
+            clearAll: 'after',
+            cssClasses: {
+                link: 'tag',
+                count: 'is-hidden'
+            }
+
+        })
+    );
+    
+
+    search.addWidget(
+        instantsearch.widgets.pagination({
+            container: '#SearchPagination',
+            cssClasses: {
+                active: 'pagination-step-active'
+            },
+            labels: {
+                previous: '<i class="ss-gizmo ss-navigateleft"></i>',
+                next: '<i class="ss-gizmo ss-navigateright"></i>'
+            },
+            showFirstLast: false
+        })
+    );
+
+    search.start();
+    </script>
+
+    <script>
+    jQuery('.no-fouc').removeClass('no-fouc');
+    </script>
+</body>
+
+</html>

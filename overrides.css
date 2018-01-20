@@ -1,0 +1,19 @@
+.searchbox {
+  margin-bottom: 10px;
+}
+
+.ais-pagination {
+  height: 50px;
+}
+
+.ais-pagination--item {
+  margin-top: 12px;
+}
+
+.ais-pagination--link {
+  padding: 15px 10px;
+}
+
+.ais-search-box--magnifier {
+  display: none;
+}
